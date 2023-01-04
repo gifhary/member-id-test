@@ -1,3 +1,3 @@
 class AppAsset {
-  static const something = 'assets/img/something.png';
+  static const bulb = 'assets/img/bulb.png';
 }
