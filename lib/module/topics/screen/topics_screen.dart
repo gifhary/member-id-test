@@ -19,6 +19,13 @@ class TopicsScreen extends StatelessWidget {
             title: const Text('Topics'),
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
+            actions: [
+              IconButton(
+                splashRadius: 24,
+                onPressed: controller.toggleSearchInput,
+                icon: const Icon(Icons.search),
+              )
+            ],
           ),
           body: Column(
             children: [
@@ -56,6 +63,18 @@ class TopicsScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
+                          ),
+                        ),
+                      ),
+                      Collapsible(
+                        collapsed: controller.searchCollapsed.value,
+                        axis: CollapsibleAxis.both,
+                        maintainAnimation: true,
+                        child: TextField(
+                          textInputAction: TextInputAction.search,
+                          onSubmitted: controller.onSearchSubmitted,
+                          decoration: const InputDecoration(
+                            hintText: 'Search',
                           ),
                         ),
                       ),

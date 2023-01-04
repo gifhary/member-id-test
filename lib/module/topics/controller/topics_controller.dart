@@ -18,14 +18,23 @@ extension SortOptionExtension on SortOptions {
 
 class TopicsController extends GetxController with TopicsRepo {
   var sortMenuCollapsed = true.obs;
+  var searchCollapsed = true.obs;
   var currentMode = SortOptions.aZ.obs;
 
   void toggleSortMenu() {
     sortMenuCollapsed.value = !sortMenuCollapsed.value;
   }
 
+  void toggleSearchInput() {
+    searchCollapsed.value = !searchCollapsed.value;
+  }
+
   void setSortOption(SortOptions option) {
     currentMode.value = option;
     sortMenuCollapsed.value = true;
+  }
+
+  void onSearchSubmitted(String word) {
+    //
   }
 }

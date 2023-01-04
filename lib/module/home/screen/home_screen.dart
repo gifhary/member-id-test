@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                         const Padding(
                           padding: EdgeInsets.only(top: 40, bottom: 16),
                           child: Text(
-                            'Flutter QUiz App',
+                            'Flutter Quiz App',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18),
                           ),
