@@ -5,16 +5,12 @@ import 'package:member_id_test/core/route/app_route.dart';
 import 'package:member_id_test/core/route/route_constant.dart';
 import 'package:member_id_test/core/theme/app_button_theme.dart';
 import 'package:member_id_test/firebase_options.dart';
-import 'package:member_id_test/module/home/controller/home_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  //make home module controller permanent for data sharing each modules
-  Get.put(HomeController(), permanent: true);
 
   runApp(const MyApp());
 }

@@ -48,7 +48,7 @@ class QuizScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 32),
                       AnswerOption(
-                        onTap: () {},
+                        onTap: () => Get.offNamed(RouteConstant.result),
                         title: 'udin sedunia ajha'.capitalizeFirstLetter(),
                       ),
                       const SizedBox(height: 16),

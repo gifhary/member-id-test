@@ -24,6 +24,7 @@ class QuizController extends GetxController with QuizRepo {
 
   _startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (t) {
+      debugPrint('timer running');
       if (timerElapsed.value < maxTimerSecond) {
         timerElapsed.value += 1;
       } else {
