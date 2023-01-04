@@ -8,25 +8,33 @@ class QuizController extends GetxController with QuizRepo {
   var timerElapsed = 0.obs;
   final maxTimerSecond = 30;
 
+  Timer? timer;
+
   @override
   void onInit() {
     super.onInit();
     _startTimer();
   }
 
+  @override
+  onClose() {
+    super.onClose();
+    timer?.cancel();
+  }
+
   _startTimer() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (t) {
       if (timerElapsed.value < maxTimerSecond) {
         timerElapsed.value += 1;
       } else {
         timerElapsed.value = 0;
         debugPrint('timer ended');
-        _nextQuestion(timer);
+        _nextQuestion();
       }
     });
   }
 
-  _nextQuestion(Timer timer) {
+  _nextQuestion() {
     //
   }
 }

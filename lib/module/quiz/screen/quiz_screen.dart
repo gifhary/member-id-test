@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:member_id_test/core/route/route_constant.dart';
 import 'package:member_id_test/module/quiz/controller/quiz_controller.dart';
+import 'package:member_id_test/module/quiz/widget/answer_option.dart';
 import 'package:member_id_test/module/quiz/widget/question_container.dart';
 import 'package:member_id_test/module/quiz/widget/timer.dart';
+import 'package:member_id_test/common/utils/string_extension.dart';
 
 class QuizScreen extends StatelessWidget {
   const QuizScreen({Key? key}) : super(key: key);
@@ -38,12 +40,22 @@ class QuizScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(24),
                   child: Column(
-                    children: const [
-                      QuestionContainer(
+                    children: [
+                      const QuestionContainer(
                         question: 'Which is the fastest animal on land?',
                         imgUrl:
                             'https://thumbs.dreamstime.com/b/cheetah-large-wild-male-chetah-sneering-96377919.jpg',
-                      )
+                      ),
+                      const SizedBox(height: 32),
+                      AnswerOption(
+                        onTap: () {},
+                        title: 'udin sedunia ajha'.capitalizeFirstLetter(),
+                      ),
+                      const SizedBox(height: 16),
+                      AnswerOption(
+                        onTap: () {},
+                        title: 'udin sedunia ajha'.capitalizeFirstLetter(),
+                      ),
                     ],
                   ),
                 ),
