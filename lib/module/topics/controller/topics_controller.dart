@@ -1,6 +1,31 @@
+import 'package:get/get.dart';
+import 'package:member_id_test/module/topics/data/repo/topics_repo.dart';
 
-  import 'package:get/get.dart';
-  import 'package:member_id_test/module/topics/data/repo/topics_repo.dart';
-  class TopicsController extends GetxController with TopicsRepo {
-  
+enum SortOptions { aZ, zA }
+
+extension SortOptionExtension on SortOptions {
+  String getName() {
+    switch (this) {
+      case SortOptions.aZ:
+        return 'A-Z';
+      case SortOptions.zA:
+        return 'Z-A';
+      default:
+        return '';
+    }
   }
+}
+
+class TopicsController extends GetxController with TopicsRepo {
+  var sortMenuCollapsed = true.obs;
+  var currentMode = SortOptions.aZ.obs;
+
+  void toggleSortMenu() {
+    sortMenuCollapsed.value = !sortMenuCollapsed.value;
+  }
+
+  void setSortOption(SortOptions option) {
+    currentMode.value = option;
+    sortMenuCollapsed.value = true;
+  }
+}
