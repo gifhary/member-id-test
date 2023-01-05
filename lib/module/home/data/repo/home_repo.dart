@@ -1,19 +1,14 @@
+import 'package:member_id_test/common/model/topic_model.dart';
+import 'package:member_id_test/module/home/data/network/home_network.dart';
 
-  //Example of Repo
-  //You might not use it
-  class HomeRepo {
-  //   // final _myNetwork = HomeNetwork();
-  
-  //   // Every function should have repo as prefix
-  
-   Future<void> repoFunc() async {
-      try {
-  //      servFunc();
-       } catch (e) {
-         rethrow;
-       }
-     }
-  
-  //   Stream<Object> repoAnotherFunc() async* {}
+class HomeRepo {
+  final _myNetwork = HomeNetwork();
+
+  Future<List<TopicModel>> repoGetTopicList() async {
+    try {
+      return await _myNetwork.getTopicList();
+    } catch (e) {
+      rethrow;
+    }
   }
-  
+}

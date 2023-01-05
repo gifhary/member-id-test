@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     width: double.maxFinite,
                     child: OutlinedButton(
-                      onPressed: () => Get.toNamed(RouteConstant.topics),
+                      onPressed: controller.onTopicTap,
                       child: const Text('TOPICS'),
                     ),
                   ),
@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         InkWell(
-                          onTap: () {},
+                          onTap: controller.onShareTap,
                           borderRadius: BorderRadius.circular(40),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(

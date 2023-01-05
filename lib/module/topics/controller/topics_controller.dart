@@ -34,7 +34,7 @@ class TopicsController extends GetxController with TopicsRepo {
     sortMenuCollapsed.value = true;
   }
 
-  void onSearchSubmitted(String word) {
+  void onSearchChanged(String word) {
     //
   }
 }

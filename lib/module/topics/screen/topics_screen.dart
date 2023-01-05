@@ -71,8 +71,7 @@ class TopicsScreen extends StatelessWidget {
                         axis: CollapsibleAxis.both,
                         maintainAnimation: true,
                         child: TextField(
-                          textInputAction: TextInputAction.search,
-                          onSubmitted: controller.onSearchSubmitted,
+                          onChanged: controller.onSearchChanged,
                           decoration: const InputDecoration(
                             hintText: 'Search',
                           ),
