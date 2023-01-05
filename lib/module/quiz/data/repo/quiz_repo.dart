@@ -1,19 +1,14 @@
+import 'package:member_id_test/module/quiz/data/model/question_model.dart';
+import 'package:member_id_test/module/quiz/data/network/quiz_network.dart';
 
-  //Example of Repo
-  //You might not use it
-  class QuizRepo {
-  //   // final _myNetwork = QuizNetwork();
-  
-  //   // Every function should have repo as prefix
-  
-   Future<void> repoFunc() async {
-      try {
-  //      servFunc();
-       } catch (e) {
-         rethrow;
-       }
-     }
-  
-  //   Stream<Object> repoAnotherFunc() async* {}
+class QuizRepo {
+  final _myNetwork = QuizNetwork();
+
+  Future<List<QuestionModel>> repoGetQuestionList(int topicId) async {
+    try {
+      return await _myNetwork.getQuestionList(topicId);
+    } catch (e) {
+      rethrow;
+    }
   }
-  
+}

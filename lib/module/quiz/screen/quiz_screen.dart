@@ -8,12 +8,14 @@ import 'package:member_id_test/module/quiz/widget/timer.dart';
 import 'package:member_id_test/common/utils/string_extension.dart';
 
 class QuizScreen extends StatelessWidget {
-  const QuizScreen({Key? key}) : super(key: key);
+  QuizScreen({Key? key}) : super(key: key);
+
+  final arg = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<QuizController>(
-      init: QuizController(),
+      init: QuizController(arg),
       builder: (QuizController controller) {
         return Scaffold(
           appBar: AppBar(
@@ -28,40 +30,54 @@ class QuizScreen extends StatelessWidget {
               ),
             ],
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Obx(
-                  () => Timer(
-                    progress: controller.timerElapsed.value,
-                    max: controller.maxTimerSecond,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(24),
+          body: Obx(() => controller.loading.value
+              ? const Center(child: CircularProgressIndicator())
+              : SingleChildScrollView(
                   child: Column(
                     children: [
-                      const QuestionContainer(
-                        question: 'Which is the fastest animal on land?',
-                        imgUrl:
-                            'https://thumbs.dreamstime.com/b/cheetah-large-wild-male-chetah-sneering-96377919.jpg',
+                      Timer(
+                        progress: controller.timerElapsed.value,
+                        max: controller.maxTimerSecond,
                       ),
-                      const SizedBox(height: 32),
-                      AnswerOption(
-                        onTap: () => Get.offNamed(RouteConstant.result),
-                        title: 'udin sedunia ajha'.capitalizeFirstLetter(),
-                      ),
-                      const SizedBox(height: 16),
-                      AnswerOption(
-                        onTap: () {},
-                        title: 'udin sedunia ajha'.capitalizeFirstLetter(),
+                      Padding(
+                        padding: const EdgeInsets.all(24),
+                        child: Column(
+                          children: [
+                            QuestionContainer(
+                              question: controller
+                                  .questions[
+                                      controller.currentQuestionIndex.value]
+                                  .question,
+                              imgUrl: controller
+                                  .questions[
+                                      controller.currentQuestionIndex.value]
+                                  .imgUrl,
+                            ),
+                            const SizedBox(height: 32),
+                            for (int i = 0;
+                                i <
+                                    (controller
+                                            .questions[controller
+                                                .currentQuestionIndex.value]
+                                            .option)
+                                        .length;
+                                i++)
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 14),
+                                child: AnswerOption(
+                                  onTap: () => controller.onQuestionAnswered(i),
+                                  title: controller
+                                      .questions[
+                                          controller.currentQuestionIndex.value]
+                                      .option[i],
+                                ),
+                              ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ),
+                )),
         );
       },
     );

@@ -8,7 +8,7 @@ import 'package:member_id_test/module/topics/screen/topics_screen.dart';
 class AppRoute {
   static final all = [
     GetPage(name: RouteConstant.home, page: () => const HomeScreen()),
-    GetPage(name: RouteConstant.quiz, page: () => const QuizScreen()),
+    GetPage(name: RouteConstant.quiz, page: () => QuizScreen()),
     GetPage(name: RouteConstant.result, page: () => const ResultScreen()),
     GetPage(name: RouteConstant.topics, page: () => TopicsScreen())
   ];
