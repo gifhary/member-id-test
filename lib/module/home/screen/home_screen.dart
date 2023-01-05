@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     width: double.maxFinite,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: controller.onPlayTap,
                       child: const Text('PLAY'),
                     ),
                   ),

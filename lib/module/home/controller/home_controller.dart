@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -35,6 +36,21 @@ class HomeController extends GetxController with HomeRepo {
     }
 
     Share.share('Hey, check out this fun quiz app $appUrl');
+  }
+
+  onPlayTap() {
+    if (topics.isEmpty) {
+      Get.snackbar('', 'We are still fetching the questions for you :)',
+          snackPosition: SnackPosition.BOTTOM,
+          showProgressIndicator: true,
+          progressIndicatorValueColor:
+              const AlwaysStoppedAnimation<Color>(Colors.cyan));
+      return;
+    }
+    final random = Random();
+    TopicModel randomTopic = topics[random.nextInt(topics.length - 0)];
+
+    Get.toNamed(RouteConstant.quiz, arguments: randomTopic.id);
   }
 
   onTopicTap() {

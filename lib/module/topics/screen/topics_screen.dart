@@ -94,10 +94,9 @@ class TopicsScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 8),
                       child: TopicItem(
                         title: controller.displayTopics.value[index].name,
-                        onTap: () =>
-                            Get.toNamed(RouteConstant.quiz, arguments: {
-                          'topicId': controller.displayTopics.value[index].id
-                        }),
+                        onTap: () => Get.toNamed(RouteConstant.quiz,
+                            arguments:
+                                controller.displayTopics.value[index].id),
                       ),
                     );
                   },
