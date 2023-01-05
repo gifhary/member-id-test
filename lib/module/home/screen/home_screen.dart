@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:member_id_test/core/assets/app_asset.dart';
-import 'package:member_id_test/core/route/route_constant.dart';
 import 'package:member_id_test/module/home/controller/home_controller.dart';
 
 class HomeScreen extends StatelessWidget {

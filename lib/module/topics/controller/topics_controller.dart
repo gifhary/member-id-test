@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:member_id_test/common/model/topic_model.dart';
 import 'package:member_id_test/module/topics/data/repo/topics_repo.dart';
 
 enum SortOptions { aZ, zA }
@@ -17,12 +18,24 @@ extension SortOptionExtension on SortOptions {
 }
 
 class TopicsController extends GetxController with TopicsRepo {
-  var sortMenuCollapsed = true.obs;
   var searchCollapsed = true.obs;
-  var currentMode = SortOptions.aZ.obs;
+  bool sortMenuCollapsed = true;
+  SortOptions currentMode = SortOptions.aZ;
+
+  List<TopicModel> topics = [];
+  Rx<List<TopicModel>> displayTopics = Rx<List<TopicModel>>([]);
+
+  TopicsController(dynamic arg) {
+    if (arg.runtimeType == topics.runtimeType) {
+      topics = arg;
+      displayTopics.value.addAll(topics);
+      setSortOption(currentMode);
+    }
+  }
 
   void toggleSortMenu() {
-    sortMenuCollapsed.value = !sortMenuCollapsed.value;
+    sortMenuCollapsed = !sortMenuCollapsed;
+    update();
   }
 
   void toggleSearchInput() {
@@ -30,11 +43,27 @@ class TopicsController extends GetxController with TopicsRepo {
   }
 
   void setSortOption(SortOptions option) {
-    currentMode.value = option;
-    sortMenuCollapsed.value = true;
+    currentMode = option;
+    sortMenuCollapsed = true;
+    switch (option) {
+      case SortOptions.aZ:
+        displayTopics.value.sort(
+            (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+        break;
+      case SortOptions.zA:
+        displayTopics.value.sort(
+            (a, b) => b.name.toLowerCase().compareTo(a.name.toLowerCase()));
+        break;
+      default:
+    }
+    update();
   }
 
   void onSearchChanged(String word) {
-    //
+    displayTopics.value = topics
+        .where((element) =>
+            element.name.toLowerCase().contains(word.toLowerCase()))
+        .toList();
+    update();
   }
 }

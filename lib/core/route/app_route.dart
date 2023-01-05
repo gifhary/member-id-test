@@ -10,6 +10,6 @@ class AppRoute {
     GetPage(name: RouteConstant.home, page: () => const HomeScreen()),
     GetPage(name: RouteConstant.quiz, page: () => const QuizScreen()),
     GetPage(name: RouteConstant.result, page: () => const ResultScreen()),
-    GetPage(name: RouteConstant.topics, page: () => const TopicsScreen())
+    GetPage(name: RouteConstant.topics, page: () => TopicsScreen())
   ];
 }
