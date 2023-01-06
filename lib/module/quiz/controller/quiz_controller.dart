@@ -57,27 +57,25 @@ class QuizController extends GetxController with QuizRepo {
       if (timerElapsed.value < maxTimerSecond) {
         timerElapsed.value += 1;
       } else {
-        timerElapsed.value = 0;
-        debugPrint('timer ended');
-        _nextQuestion();
+        //timer ended without answer
+        onQuestionAnswered(null);
       }
     });
   }
 
-  //TODO handle question answer when time is up in each question
-
-  onQuestionAnswered(int optionIndex) {
+  onQuestionAnswered(int? optionIndex) {
+    timerElapsed.value = 0;
     userAnswers
         .add(UserAnswer(questions[currentQuestionIndex.value], optionIndex));
 
-    if (currentQuestionIndex.value < questions.length - 1) {
-      _nextQuestion();
-    } else {
-      Get.offAllNamed(RouteConstant.result, arguments: userAnswers);
-    }
+    _nextQuestion();
   }
 
   _nextQuestion() {
-    currentQuestionIndex.value++;
+    if (currentQuestionIndex.value < questions.length - 1) {
+      currentQuestionIndex.value++;
+    } else {
+      Get.offAllNamed(RouteConstant.result, arguments: userAnswers);
+    }
   }
 }

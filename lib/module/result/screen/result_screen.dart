@@ -6,17 +6,21 @@ import 'package:member_id_test/module/result/controller/result_controller.dart';
 import 'package:member_id_test/module/result/widget/result_item.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({Key? key}) : super(key: key);
+  ResultScreen({Key? key}) : super(key: key);
+
+  final arg = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ResultController>(
-      init: ResultController(),
+      init: ResultController(arg),
       builder: (ResultController controller) {
         return WillPopScope(
+          //prevent back button or gesture swipe back
           onWillPop: () async => false,
           child: Scaffold(
             appBar: AppBar(
+              //override back button
               leading: BackButton(
                 onPressed: () => Get.offAllNamed(RouteConstant.home),
               ),
@@ -39,14 +43,16 @@ class ResultScreen extends StatelessWidget {
                         child: Transform(
                           alignment: Alignment.center,
                           transform: Matrix4.rotationY(math.pi),
-                          child: const CircularProgressIndicator(
-                            value: 4 / 5,
+                          child: CircularProgressIndicator(
+                            value: controller.correctAnswer /
+                                controller.userAnswers.length,
                             color: Colors.green,
                             backgroundColor: Colors.orange,
                           ),
                         ),
                       ),
-                      const Text('4/5')
+                      Text(
+                          '${controller.correctAnswer}/${controller.userAnswers.length}')
                     ],
                   ),
                 ),
@@ -57,10 +63,10 @@ class ResultScreen extends StatelessWidget {
                         textStyle: const TextStyle(fontSize: 14),
                         backgroundColor: Colors.blue,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4), // <-- Radius
+                          borderRadius: BorderRadius.circular(4),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: controller.shareScore,
                       child: const Text('Share your score')),
                 ),
                 Center(
@@ -70,15 +76,18 @@ class ResultScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-                for (int i = 0; i < 50; i++)
+                for (var answer in controller.userAnswers)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: ResultItem(
-                      question:
-                          'questionsa df asdf asdf asd fa sdf asd fas df asdf asd fa sdf asd adsf?',
-                      userAnswer: 'iya',
-                      correctAnswer: 'engga',
-                      correct: i % 2 == 0,
+                      question: answer.question.question,
+                      userAnswer: answer.userAnswerIndex == null
+                          ? null
+                          : answer.question.option[answer.userAnswerIndex!],
+                      correctAnswer:
+                          answer.question.option[answer.question.answerIndex],
+                      correct:
+                          answer.question.answerIndex == answer.userAnswerIndex,
                     ),
                   ),
               ],

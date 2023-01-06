@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ResultItem extends StatelessWidget {
   final String question;
-  final String userAnswer;
+  final String? userAnswer;
   final String correctAnswer;
   final bool correct;
   const ResultItem(
@@ -30,7 +30,14 @@ class ResultItem extends StatelessWidget {
                     Icons.close,
                     color: Colors.red,
                   ),
-                  Text(userAnswer),
+                  Text(
+                    userAnswer ?? 'no answer',
+                    style: TextStyle(
+                        color: userAnswer == null ? Colors.grey : Colors.white,
+                        fontStyle: userAnswer == null
+                            ? FontStyle.italic
+                            : FontStyle.normal),
+                  ),
                   const SizedBox(width: 5)
                 ],
               ),

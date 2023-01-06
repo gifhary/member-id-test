@@ -9,7 +9,7 @@ class AppRoute {
   static final all = [
     GetPage(name: RouteConstant.home, page: () => const HomeScreen()),
     GetPage(name: RouteConstant.quiz, page: () => QuizScreen()),
-    GetPage(name: RouteConstant.result, page: () => const ResultScreen()),
+    GetPage(name: RouteConstant.result, page: () => ResultScreen()),
     GetPage(name: RouteConstant.topics, page: () => TopicsScreen())
   ];
 }

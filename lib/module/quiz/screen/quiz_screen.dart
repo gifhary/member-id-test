@@ -5,7 +5,6 @@ import 'package:member_id_test/module/quiz/controller/quiz_controller.dart';
 import 'package:member_id_test/module/quiz/widget/answer_option.dart';
 import 'package:member_id_test/module/quiz/widget/question_container.dart';
 import 'package:member_id_test/module/quiz/widget/timer.dart';
-import 'package:member_id_test/common/utils/string_extension.dart';
 
 class QuizScreen extends StatelessWidget {
   QuizScreen({Key? key}) : super(key: key);
