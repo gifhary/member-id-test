@@ -44,11 +44,17 @@ class QuizController extends GetxController with QuizRepo {
     loading.value = true;
     try {
       questions = await repoGetQuestionList(topicId);
+      if (questions.isEmpty) {
+        Get.back();
+        Fluttertoast.showToast(msg: 'We dont have question in this topic yet');
+      } else {
+        loading.value = false;
+      }
     } catch (e) {
       debugPrint(e.toString());
+      Get.back();
       Fluttertoast.showToast(msg: 'Failed fetching questions');
     }
-    loading.value = false;
   }
 
   _startTimer() {
